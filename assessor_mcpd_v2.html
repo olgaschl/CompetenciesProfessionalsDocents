@@ -54,9 +54,6 @@
 <script>
 let dadesTreball = null;
 
-//const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
-//const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-//const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent";
 const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
 const CONTEXT_MARC = `
@@ -86,21 +83,27 @@ REFERENCIAL TÈCNIC MCPD (DEPARTAMENT D'EDUCACIÓ DE CATALUNYA):
    - D1: Alfabetització en IA. D2: Ètica i biaixos. D3: IA per a gestió i didàctica.
 
 6. Competència Comunicativa (PDF N):
-   - D1: Context sociolingüístic (TIL/TILC). D2: Llenguatge com a eina d'aprenentatge.
+   - D1: Context sociolingüístic (TIL/TILC). 
+   - D2: Llenguatge com a eina d'aprenentatge.
    - D3: Comunicació organitzativa. D4: Art i cultura.
 
 7. Competència Socioemocional (PDF S):
-   - D1: Consciència/Regulació. D2: Autonomia emocional.
+   - D1: Consciència/Regulació. 
+   - D2: Autonomia emocional.
    - D3: Habilitats socioemocionals (Empatia, Conflictes). D4: Benestar comú.
 
 8. Desenvolupament professional (PDF FF):
-   - D1: Aprenentatge permanent. D2: Reflexió sobre la pràctica.
+   - D1: Aprenentatge permanent. 
+   - D2: Reflexió sobre la pràctica.
    - D3: Compromís ètic. D4: Satisfacció i identitat.
 
 NIVELLS:
-- A1-A2 (Novell): Coneix i aplica amb guiatge.
-- B1-B2 (Consolidat): Aplica autònomament, adapta i col·labora.
-- C1-C2 (Expert): Lidera, innova, mentora i transforma el centre.`;
+   - A1 Iniciació / Coneixement teòric inicial o pràctica incipient sense autonomia.
+   - A2 Aplicació: coneix i aplica en contextos reals de manera tutelada.
+   - B1 Aprofundiment / Adopció:   ús autònom i convencional dels recursos i procediments, integrant-los sistemàticament en el dia a dia sense necessitar supervisió constant.
+   - B2 Consolidació / Adaptació: adapta i transfereix el coneixement a situacions noves de manera flexible, col·laborant amb l'equip.
+   - C1 Innovació / Lideratge: El focus s'amplia a tot el centre educatiu; mentor, coordina projectes institucionals i dinamitza processos de recerca-acció.
+   - C2 Transformació / Recerca: Expert, referent, innova, transforma i lidera canvis disruptius.`;
 
 function escriureLog(msg, color = "#4ade80") {
     const p = document.getElementById('logPanel');
@@ -142,7 +145,9 @@ async function iniciarAnalisi() {
 
             const prompt = `${CONTEXT_MARC}
 
-Ets l'assessor intel·ligent del Departament d'Educació de Catalunya. Analitza aquesta activitat formativa i retorna un JSON amb exactament aquestes claus:
+Ets l'assessor expert en competències professionals docents del Departament d'Educació de Catalunya. La teva funció és donar suport als tècnics i tècniques gestors del Departament d’Educació que planifiquen i dissenyen activitats de formació per al professorat.
+La teva tasca principal és **identificar i analitzar quines competències professionals docents es treballen en una activitat formativa**, així com determinar:
+ Analitza les activitats formatives i retorna un JSON amb exactament aquestes claus:
 - "Competencia": nom oficial de la competència principal
 - "Dimensions": dimensions treballades amb número i nom (ex: "D2: Planificació, D3: Avaluació")
 - "Criteris": criteris d'avaluació alineats amb l'activitat
