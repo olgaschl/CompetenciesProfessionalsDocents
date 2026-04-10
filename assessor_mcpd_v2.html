@@ -56,7 +56,8 @@ let dadesTreball = null;
 
 //const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 //const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent";
+//const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent";
+const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
 const CONTEXT_MARC = `
 REFERENCIAL TÈCNIC MCPD (DEPARTAMENT D'EDUCACIÓ DE CATALUNYA):
@@ -159,7 +160,8 @@ ACTIVITAT: ${JSON.stringify(fila)}`;
                     generationConfig: {
                         temperature: 0.1,
                         maxOutputTokens: 1024,
-                        responseMimeType: "application/json"
+                        responseMimeType: "application/json",
+						thinkingConfig: { thinkingBudget: 0 }
                     }
                 })
             });
